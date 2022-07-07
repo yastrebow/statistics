@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: 'MS Statistics'
+  description: 'Recording information about calling GET-method in MS-agreement to MongoDB "request_statistics"'
+  contact:
+    name: 'Iastrebov Andrei'
+    url: 'https://github.com/yastrebow'
+  version: 1.0-version
+servers:
+  - url: 'http://localhost:8083/'
+    description: 'localhost'
+paths:
+  /request_statistics:
+    post:
+      tags:
+        - calling GET-method in MS-agreement to MongoDB
+      summary: Send information to MongoDB "request_statistics"
+      operationId: request_statistics
+      description: Send information about calling GET-method in MS-agreement to MongoDB "request_statistics"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStatisticsDTO'
+        '404':
+          description: No applications present
+
+components:
+  schemas:
+    RequestStatisticsDTO:
+      description: Info about calling GET-method
+      title: Response
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Request id
+          format: int64
+          example: 123456789
+        date:
+          type: string
+          format: date
+          description: datetime stamp of the calling GET-method in format "YYYY-MM-DD THH:MM:SSZ"
+          example: 2001-12-14T18:36:25Z
+        status:
+          type: string
+          enum:
+            - approved
+            - not approved
