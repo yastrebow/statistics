@@ -1,19 +1,20 @@
 openapi: 3.0.0
 info:
-  title: 'MS Statistics'
-  description: 'Recording information about calling GET-method in MS-agreement to MongoDB "request_statistics"'
+  title: MS Statistics
+  description: Recording information about calling GET-method in MS-agreement to MongoDB "request_statistics"
   contact:
-    name: 'Iastrebov Andrei'
-    url: 'https://github.com/yastrebow'
+    name: Iastrebov Andrei
+    email: aiastrebov@neoflex.ru
+    url: https://github.com/yastrebow
   version: 1.0-version
 servers:
-  - url: 'http://localhost:8083/'
-    description: 'localhost'
+  - url: http://localhost:8083/
+    description: localhost
 paths:
   /request_statistics:
     post:
       tags:
-        - calling GET-method in MS-agreement to MongoDB
+        - info about calling GET-method in the MS-agreement to MongoDB
       summary: Send information to MongoDB "request_statistics"
       operationId: request_statistics
       description: Send information about calling GET-method in MS-agreement to MongoDB "request_statistics"
@@ -23,13 +24,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RequestStatisticsDTO'
+                $ref: '#/components/schemas/StatisticsDTO'
         '404':
           description: No applications present
 
 components:
   schemas:
-    RequestStatisticsDTO:
+    StatisticsDTO:
       description: Info about calling GET-method
       title: Response
       type: object
@@ -41,11 +42,12 @@ components:
           example: 123456789
         date:
           type: string
-          format: date
-          description: datetime stamp of the calling GET-method in format "YYYY-MM-DD THH:MM:SSZ"
+          format: date-time
+          description: datetime stamp of the calling GET-method in format "YYYY-MM-DDTHH:MM:SSZ"
           example: 2001-12-14T18:36:25Z
         status:
           type: string
           enum:
             - approved
             - not approved
+            - not found
